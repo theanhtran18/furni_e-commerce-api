@@ -4,9 +4,9 @@ import { connectToDB } from "./lib/db.js"
 import 'dotenv/config';
 import authRouter from "./routes/auth.js";
 import './lib/redis.js';
-import productRouter from "./routes/product.js";
-
-
+import productRouter from "./routes/products.js";
+import cartItemRouter from "./routes/cart-items.js";
+import cartRouter from "./routes/shopping-carts.js";
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -17,7 +17,8 @@ app.use(express.urlencoded({ extended: true }))
 
 app.use(authRouter)
 app.use(productRouter)
-
+app.use(cartItemRouter)
+app.use(cartRouter)
 
 const startServer = async () => {
   await connectToDB()

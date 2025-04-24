@@ -1,16 +1,9 @@
 import { signAccessToken, signRefreshToken } from '../lib/jwt.js';
 import User from '../models/user.js'
-import { OAuth2Client, UserRefreshClient } from 'google-auth-library'
 import cookie from "cookie";
 import { addUser } from '../services/user.js';
 import { transporter, generateVerificationCode } from '../lib/mail.js';
 
-// //const oAuth2Client = new OAuth2Client(process.env.GG_CLIENT_ID, process.env.GG_CLIENT_SECRET, http://localhost:8088/auth/google/callback)
-// const oAuth2Client = new OAuth2Client({
-// 	clientId: process.env.GG_CLIENT_ID,
-// 	clientSecret: process.env.GG_CLIENT_SECRET,
-// 	redirectUri: 'http://localhost:8088/auth/google/callback',
-// });
 
 // Login or Register
 export const findUserByEmailOrCreate = async (req, res) => {
@@ -29,7 +22,6 @@ export const findUserByEmailOrCreate = async (req, res) => {
 			cookie.serialize("access_token", accToken, { httpOnly: true, secure: true, sameSite: "none", path: "/" }),
 			cookie.serialize("refresh_token", refreshToken, { httpOnly: true, secure: true, sameSite: "none", path: "/" })
 		]);
-
 		res.json({ user });
 	} catch (error) {
 		console.error('[findUserByEmailOrCreate]', error);

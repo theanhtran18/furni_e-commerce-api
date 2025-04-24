@@ -30,7 +30,10 @@ const UserSchema = new Schema(
       type: String,
       enum: ['admin', 'user'],
       default: 'user',
-    }
+    },
+    address: [{
+      type: Schema.Types.ObjectId, ref: "Address"
+    }]
 
   },
   { timestamps: true }
