@@ -30,6 +30,12 @@ const OrderSchema = new Schema(
     note: {
       type: String,
     },
+
+    shippingAddress: {
+      type: Schema.Types.ObjectId,
+      ref: "Address",
+      required: true,
+    },
   },
   { timestamps: true }
 );
