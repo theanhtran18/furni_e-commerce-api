@@ -9,6 +9,7 @@ import cartItemRouter from "./routes/cart-items.js";
 import cartRouter from "./routes/shopping-carts.js";
 import orderRouter from "./routes/orders.js";
 import userRouter from "./routes/users.js";
+import productReviewRouter from "./routes/product-review.js";
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -23,6 +24,7 @@ app.use(cartItemRouter);
 app.use(cartRouter);
 app.use(orderRouter);
 app.use(userRouter);
+app.use(productReviewRouter);
 
 const startServer = async () => {
   await connectToDB();

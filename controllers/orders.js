@@ -67,6 +67,7 @@ export const getAllOrder = async (req, res) => {
           totalPrice: {
             $multiply: ["$productDetail.price", "$product.quantity"],
           },
+          updatedAt: 1,
         },
       },
     ]);
