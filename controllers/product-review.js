@@ -1,8 +1,10 @@
 import ProductReview from "../models/product-review.js";
 
 export const addProductReview = async (req, res) => {
-  const { product, user, comment } = req.body;
+  const { product, comment } = req.body;
+  const user = req.user.userId;
   const rating = Number(req.body.rating);
+
   const productReview = await ProductReview.create({
     product,
     user,

@@ -15,8 +15,7 @@ export const placeOrder = async (req, res) => {
 
 export const getAllOrder = async (req, res) => {
   try {
-    const { userId } = req.body;
-
+    const userId = req.user.userId;
     const orders = await Order.aggregate([
       {
         $match: {
@@ -80,8 +79,9 @@ export const getAllOrder = async (req, res) => {
 };
 
 export const updateOrder = async (req, res) => {
-  const { orderId, status } = req.body;
-  const order = await Order.findById(orderId);
+  const id = req.params.id;
+  const { status } = req.body;
+  const order = await Order.findById(id);
   if (!order) {
     return res.json("Order not found!");
   }

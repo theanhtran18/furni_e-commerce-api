@@ -2,8 +2,11 @@ import User from "../models/user.js";
 import Address from "../models/address.js";
 
 export const getUser = async (req, res) => {
-  const { email } = req.body;
-  const user = await User.findOne({ email: email });
+  const userId = req.user.userId;
+  if (!userId) {
+    return res.status(404).json({ status: false, message: "User not found" });
+  }
+  const user = await User.findById(userId);
   if (user) {
     return res.json(user);
   }
@@ -12,13 +15,13 @@ export const getUser = async (req, res) => {
 
 export const editProfile = async (req, res) => {
   try {
-    const { givenName, familyName, address, phone, email, dateOfBirth } =
-      req.body;
-
-    const user = await User.findOne({ email });
-    if (!user) {
+    const userId = req.user.userId;
+    if (!userId) {
       return res.status(404).json({ status: false, message: "User not found" });
     }
+    const { givenName, familyName, address, phone, dateOfBirth } = req.body;
+
+    const user = await User.findById(userId);
 
     if (givenName !== undefined) user.givenName = givenName;
     if (familyName !== undefined) user.familyName = familyName;
