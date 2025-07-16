@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { getAllProduct, addProduct } from "../controllers/products.js";
+import { addProduct, getProducts } from "../controllers/products.js";
 import {
   checkAdminPermission,
   verifyAccessToken,
@@ -7,7 +7,8 @@ import {
 
 const productRouter = Router();
 
-productRouter.get("/products", getAllProduct);
+productRouter.get("/products", getProducts);
+
 productRouter.post(
   "/products",
   verifyAccessToken,

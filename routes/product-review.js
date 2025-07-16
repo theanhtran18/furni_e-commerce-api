@@ -13,7 +13,7 @@ productReviewRouter.get(
   "/products/:id/reviews',",
   getAllProductReviewByProductId
 );
-productReviewRouter.post("/reviews/add", verifyAccessToken, addProductReview);
+productReviewRouter.post("/reviews", verifyAccessToken, addProductReview);
 productReviewRouter.delete(
   "/reviews/:id",
   verifyAccessToken,

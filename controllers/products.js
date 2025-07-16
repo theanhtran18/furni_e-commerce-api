@@ -23,3 +23,24 @@ export const addProduct = async (req, res) => {
     else res.json("Error");
   } else res.json("Error");
 };
+
+export const getProducts = async (req, res) => {
+  const page = parseInt(req.query.page) || 1;
+  const limit = parseInt(req.query.limit) || 10;
+
+  const skip = (page - 1) * limit;
+
+  const [products, totalItems] = await Promise.all([
+    Product.find().skip(skip).limit(limit),
+    Product.countDocuments(),
+  ]);
+
+  const totalPages = Math.ceil(totalItems / limit);
+
+  return res.json({
+    page,
+    totalPages,
+    totalItems,
+    products,
+  });
+};
